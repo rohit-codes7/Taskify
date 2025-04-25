@@ -31,25 +31,18 @@ const Login = () => {
   const login = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:1000/api/v1/login", values);
-
-      // Check if response and data exist before navigating
-      if (res && res.data && res.data.success) {
-        alert("Registration Successful!");
-        navigate("/login");
-      } else {
-        alert("Unexpected response from the server.");
-      }
-    } catch (err) {
-      console.error("Error:", err);
-
-      // Check if error response exists
-      if (err.response && err.response.data) {
-        alert(err.response.data.error || "Something went wrong!");
-      } else {
-        alert("Failed to connect to the server. Check your backend.");
-      }
+      const res = await axios.post("http://localhost:1000/api/v1/login", values,
+        {
+          withCredentials: true, // Include credentials in the request
+        }
+      );
+      localStorage.setItem("userLoggedIn","true");
+    navigate("/dashboard");
+    } 
+    catch (err) {
+      alert(err.response.data.error);
     }
+
   };
 
   return (

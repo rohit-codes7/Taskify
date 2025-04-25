@@ -51,7 +51,7 @@ const editTask = async (req, res) => {
             return res.status(400).json({error: "Description must be at least 10 characters long"});
         }
 
-       await task.findByIdAndUpdate(id, {
+       await Task.findByIdAndUpdate(id, {
             title,
             description,
             priority,
@@ -68,7 +68,7 @@ const editTask = async (req, res) => {
 
 
 // get task
-const get = async (req, res) => {
+const getTask = async (req, res) => {
     try{
 
         const {id} = req.params;
@@ -102,3 +102,10 @@ const deleteTask = async (req, res) => {
     }
 }
 
+
+module.exports = {
+    addTask,
+    editTask,
+    getTask,
+    deleteTask
+}

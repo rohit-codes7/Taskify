@@ -5,10 +5,11 @@ const cookieParser = require("cookie-parser")
 require("dotenv").config()
 require("./Connection/Conn")
 const userApis = require("./Controllers/User")
+const taskApis = require("./Controllers/Task")
 app.use(express.json())
 
 app.use(cors({
-    origin: ["http://localhost:5173"], credintials: true
+    origin: ["http://localhost:5173"], credentials: true
 }
 ))
 
@@ -17,6 +18,7 @@ app.get("/", (req,res)=>{
     res.send("Hello from backend")
 })
 app.use("/api/v1",userApis)
+app.use("/api/v1",taskApis)
 app.listen(`${process.env.PORT}`, () => {
     console.log("Server is running on port 1000")
 })
